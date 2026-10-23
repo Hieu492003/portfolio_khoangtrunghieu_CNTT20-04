@@ -1,0 +1,1629 @@
+/* Màu và giới hạn chiều rộng dùng chung toàn trang.
+   Đổi biến tại đây để cập nhật đồng bộ màu chữ, nền, focus và điểm nhấn. */
+:root {
+  color-scheme: light;
+  --ink: #192536;
+  --muted: #647286;
+  --soft: #f1f5fa;
+  --paper: #ffffff;
+  --line: #e3e9f0;
+  --focus: #f06b3d;
+  --hover: #d9562d;
+  --accent: #e7653b;
+  --navy: #14243a;
+  --green: #46ad83;
+  --purple: #8b73df;
+  --content: 70rem;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tính cả padding và border vào width/height để phần tử không vượt khung. */
+* {
+  box-sizing: border-box;
+}
+
+/* Cuộn tới các mục điều hướng mượt; scroll-padding chừa khoảng thở khi tới đích. */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
+}
+
+/* Cỡ chữ cơ sở 1rem và line-height tạo nhịp đọc thoáng cho nội dung. */
+body {
+  min-width: 20rem;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* Link giữ màu chữ của vùng chứa; bỏ gạch chân mặc định để dùng kiểu giao diện riêng. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Nút và trường nhập kế thừa font trang để kiểu chữ không lệch giữa trình duyệt. */
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+/* Bỏ lớp chớp màu mặc định trên một số trình duyệt di động khi chạm. */
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Chỉ báo bàn phím dùng chung cho link, nút và trường nhập.
+   Không bỏ outline: viền cam và khoảng lệch giúp nhận biết phần tử đang được focus. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 0.1875rem solid var(--focus);
+  outline-offset: 0.1875rem;
+}
+
+/* Nút dùng cùng màu chữ kế thừa, còn màu nền/viền được đặt theo từng biến thể. */
+button {
+  color: inherit;
+}
+
+/* Màu chọn văn bản đồng bộ với bảng màu tối của trang. */
+::selection {
+  color: var(--paper);
+  background: var(--navy);
+}
+
+/* Khung nội dung giữa trang: co theo màn hình nhưng có chiều rộng tối đa. */
+.container {
+  width: min(var(--content), calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+/* Khoảng cách dọc mặc định giữa các phần; breakpoint desktop tăng thêm. */
+.section {
+  padding-block: 5.5rem;
+}
+
+/* Nền dịu để phân biệt một số phần với nền trắng chính. */
+.section-soft {
+  background: #f6f8fb;
+}
+
+/* Nhãn phụ dùng chung cho tiêu đề mục, dự án, form và mốc thời gian. */
+.eyebrow,
+.project-kicker,
+.form-step,
+.timeline-date {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* Chữ nhấn màu cam dùng trong tiêu đề và các đoạn cần nổi bật. */
+.text-accent {
+  color: var(--accent);
+}
+
+/* Liên kết bỏ qua menu: nằm ngoài màn hình đến khi người dùng bàn phím focus. */
+.skip-link {
+  position: fixed;
+  z-index: 20;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.65rem 1rem;
+  transform: translateY(-160%);
+  border-radius: 0.5rem;
+  color: var(--paper);
+  background: var(--navy);
+}
+
+/* Đưa liên kết bỏ qua vào màn hình khi nhận focus bàn phím. */
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Header nằm trên nội dung trang nhưng không che các thành phần focus. */
+.site-header {
+  position: relative;
+  z-index: 5;
+  border-bottom: 1px solid rgb(226 233 240 / 75%);
+  background: var(--paper);
+}
+
+/* Logo và footer dùng flex để căn giữa theo chiều dọc và tách hai đầu. */
+.header-inner,
+.footer-inner {
+  display: flex;
+  min-height: 4.7rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Logo là link về đầu trang; không co lại khi menu chiếm thêm chỗ. */
+.brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+/* Ô chữ cái tạo dấu nhận diện logo, giữ hình vuông bằng aspect-ratio. */
+.brand-mark {
+  display: grid;
+  width: 2rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 0.65rem;
+  color: white;
+  background: var(--navy);
+  font-size: 0.9rem;
+}
+
+/* Dấu chấm trong chữ logo lấy màu nhấn. */
+.brand-dot {
+  color: var(--accent);
+}
+
+/* Menu tự xuống dòng khi thiếu chỗ, căn các liên kết về phía cuối header. */
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+/* Vùng bấm menu có padding; transition đặt ở trạng thái gốc để cả vào và ra mượt. */
+.site-nav a {
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.4rem;
+  color: #465469;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+/* Hover đổi nền nhẹ và màu chữ, không làm mất khả năng focus-visible bằng bàn phím. */
+.site-nav a:hover {
+  color: var(--ink);
+  background: var(--soft);
+}
+
+/* Hero là phần giới thiệu đầu trang; gradient nền tạo điểm nhấn mà không cần ảnh ngoài. */
+.hero {
+  position: relative;
+  display: flex;
+  min-height: 36rem;
+  align-items: center;
+  overflow: hidden;
+  padding-block: 5rem 6rem;
+  background:
+    radial-gradient(ellipse at 82% 48%, rgb(231 101 59 / 8%), transparent 29rem),
+    linear-gradient(180deg, #fff 0%, #fcfdff 100%);
+}
+
+/* Mobile-first: hero xếp nội dung theo cột; hai cột chỉ bật ở breakpoint 48rem. */
+.hero-grid {
+  display: grid;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Đặt nội dung giới thiệu phía trên hình minh họa khi các lớp giao nhau. */
+.hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+/* Căn chấm trạng thái và nhãn phụ thành một hàng. */
+.hero-copy .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* Chấm trạng thái nhỏ, không co khi đứng trong flex; vòng mờ tăng độ nhận biết. */
+.status-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 0.25rem rgb(70 173 131 / 12%);
+}
+
+/* Cho phép chữ dài tự ngắt, tránh làm tràn khung trên màn hình hẹp. */
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: anywhere;
+}
+
+/* Kiểu chữ và khoảng cách dòng nhất quán cho các cấp tiêu đề. */
+h1,
+h2,
+h3 {
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.2;
+}
+
+/* Tiêu đề hero co giãn theo viewport nhưng vẫn nằm trong giới hạn dễ đọc. */
+.hero h1 {
+  max-width: 42rem;
+  margin: 1.35rem 0 1rem;
+  font-size: clamp(2.65rem, 8vw, 4.7rem);
+  font-weight: 800;
+  letter-spacing: -0.075em;
+}
+
+/* Đoạn giới thiệu giới hạn chiều rộng để dòng văn bản không quá dài. */
+.hero-lede {
+  max-width: 34rem;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.03rem;
+  line-height: 1.8;
+}
+
+/* Các nhóm hành động dùng flex và có thể xuống dòng trên màn hình nhỏ. */
+.hero-actions,
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Tách cụm nút khỏi phần giới thiệu bằng khoảng cách trên. */
+.hero-actions {
+  margin-top: 1.8rem;
+}
+
+/* Kiểu cơ sở cho link dạng nút và button thật; transition đặt ở gốc để
+   hover và trạng thái trở về đều mượt, transform không làm xê dịch bố cục. */
+.button {
+  display: inline-flex;
+  min-height: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 0.55rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+/* Trạng thái nhấn tạo chuyển động xuống rất nhẹ để phản hồi thao tác. */
+.button:active {
+  transform: translateY(0.0625rem);
+}
+
+/* Nút chính dùng màu nhấn với chữ trắng để phân cấp hành động. */
+.button-primary {
+  color: white;
+  background: var(--accent);
+}
+
+/* Màu hover tối hơn nền gốc để nút vẫn dễ nhận biết khi rê chuột. */
+.button-primary:hover {
+  background: var(--hover);
+}
+
+/* Nút phụ có viền nhẹ, ít nổi bật hơn hành động chính. */
+.button-quiet {
+  border-color: var(--line);
+  color: var(--ink);
+  background: white;
+}
+
+/* Link nút phụ và nút reset chia sẻ nền hover nhẹ. */
+.button-quiet:hover,
+.button-reset:hover {
+  border-color: #cad4df;
+  background: var(--soft);
+}
+
+/* Ghi chú dưới nút dùng sắc xám dịu, tách khỏi nội dung chính. */
+.hero-note {
+  margin: 1rem 0 0;
+  color: #8490a0;
+  font-size: 0.8rem;
+}
+
+/* Vùng minh họa làm gốc định vị cho các hình trang trí tuyệt đối. */
+.hero-art {
+  position: relative;
+  display: grid;
+  min-height: 19rem;
+  place-items: center;
+  isolation: isolate;
+}
+
+/* Các vòng trang trí đặt phía sau card, không chiếm chỗ trong luồng bố cục. */
+.art-orbit {
+  position: absolute;
+  z-index: -1;
+  border: 1px solid rgb(231 101 59 / 14%);
+  border-radius: 50%;
+}
+
+/* Vòng nhỏ và lớn tạo nhiều lớp chiều sâu quanh minh họa. */
+.orbit-one {
+  width: 19rem;
+  aspect-ratio: 1;
+}
+
+/* Vòng ngoài đổi viền nhạt hơn để không cạnh tranh với nội dung. */
+.orbit-two {
+  width: 24rem;
+  aspect-ratio: 1;
+  border-color: rgb(20 36 58 / 7%);
+}
+
+/* Thẻ minh họa mã giả: giới hạn chiều rộng, cắt nội dung thừa và tạo bóng. */
+.code-card {
+  z-index: 1;
+  width: min(100%, 22rem);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 20%);
+  border-radius: 0.9rem;
+  color: #dae6f5;
+  background: #17283e;
+  box-shadow: 0 1.5rem 4rem rgb(24 40 61 / 20%);
+  transform: rotate(-2deg);
+  transition: transform 180ms ease;
+}
+
+/* Rê chuột làm thẻ thẳng nhẹ và nâng lên; không thay đổi kích thước bố cục. */
+.code-card:hover {
+  transform: rotate(0) translateY(-0.25rem);
+}
+
+/* Thanh tiêu đề giả lập cửa sổ trình soạn thảo. */
+.code-top {
+  display: flex;
+  height: 2.9rem;
+  align-items: center;
+  gap: 0.4rem;
+  padding-inline: 1rem;
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+}
+
+/* Ba chấm màu biểu thị nút cửa sổ trang trí. */
+.code-top>span {
+  width: 0.52rem;
+  height: 0.52rem;
+  border-radius: 50%;
+  background: #ee7761;
+}
+
+/* Chấm thứ hai dùng màu vàng. */
+.code-top>span:nth-child(2) {
+  background: #e7b75a;
+}
+
+/* Chấm thứ ba dùng màu xanh. */
+.code-top>span:nth-child(3) {
+  background: #64ba8c;
+}
+
+/* Tên tệp được đẩy sang phải trong thanh tiêu đề. */
+.code-top small {
+  margin-left: auto;
+  color: #9cabc0;
+  font-size: 0.7rem;
+}
+
+/* Khối mã giả dùng font monospace để giống trình soạn thảo. */
+.code-lines {
+  padding: 1.1rem 1rem;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.77rem;
+}
+
+/* Mỗi dòng có khoảng cách dọc đều, không phụ thuộc margin mặc định của p. */
+.code-lines p {
+  margin: 0.8rem 0;
+}
+
+/* Màu riêng cho số dòng, thẻ và văn bản trong minh họa mã. */
+.code-muted {
+  color: #6b7c92;
+}
+
+/* Tô màu cú pháp minh họa. */
+.code-purple {
+  color: #c4a5ff;
+}
+
+/* Tô màu cú pháp minh họa. */
+.code-blue {
+  color: #75c9e8;
+}
+
+/* Chân thẻ mã đặt thông điệp trạng thái và đường phân cách. */
+.code-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid rgb(255 255 255 / 8%);
+  color: #a7b5c7;
+  font-size: 0.72rem;
+}
+
+/* Nhãn nổi đặt tuyệt đối trong vùng minh họa, phía trên các vòng trang trí. */
+.floating-chip {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 0.6rem;
+  background: white;
+  box-shadow: 0 0.5rem 1.5rem rgb(31 47 69 / 8%);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+/* Biểu tượng trong nhãn nổi lấy màu nhấn mặc định. */
+.floating-chip span {
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+/* Vị trí nhãn công nghệ HTML trên vùng minh họa. */
+.chip-html {
+  top: 15%;
+  left: 0;
+}
+
+/* Vị trí nhãn công nghệ CSS đối diện nhãn HTML. */
+.chip-css {
+  right: 0;
+  bottom: 12%;
+}
+
+/* Biểu tượng CSS dùng màu tím để phân biệt nhãn. */
+.chip-css span {
+  color: var(--purple);
+}
+
+/* Các ký hiệu trang trí đặt tuyệt đối và không tham gia bố cục. */
+.hero-spark {
+  position: absolute;
+  color: var(--accent);
+}
+
+/* Vị trí và kích thước ký hiệu trang trí phía trên. */
+.spark-one {
+  top: 12%;
+  right: 12%;
+  font-size: 1.4rem;
+}
+
+/* Ký hiệu phía dưới đổi màu để tạo cân bằng thị giác. */
+.spark-two {
+  bottom: 16%;
+  left: 5%;
+  color: var(--purple);
+  font-size: 1.1rem;
+}
+
+/* Gợi ý cuộn được căn giữa đáy hero; transform chỉ dùng để căn vị trí. */
+.scroll-cue {
+  position: absolute;
+  bottom: 1.35rem;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transform: translateX(-50%);
+  color: #8490a0;
+  font-size: 0.75rem;
+}
+
+/* Mũi tên chỉ hướng cuộn dùng màu nhấn. */
+.scroll-cue span {
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+/* Tiêu đề mỗi phần có giới hạn chiều rộng và khoảng cách với nội dung tiếp theo. */
+.section-heading {
+  max-width: 39rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Cỡ chữ tiêu đề các phần co theo viewport trong một khoảng dễ đọc. */
+.section-heading h2,
+.contact-copy h2 {
+  margin: 0.65rem 0 0.8rem;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.065em;
+}
+
+/* Mô tả tiêu đề dùng màu phụ; reset margin mặc định để khoảng cách nhất quán. */
+.section-heading>p:last-child,
+.contact-copy>p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Lưới kỹ năng, dự án, ghi chú: một cột trên mobile, nhiều cột ở media query. */
+.skills-grid,
+.projects-grid,
+.notes-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Khung card có viền, nền và transition chung; :focus-within bên dưới hỗ trợ
+   bàn phím khi link con trong card được focus. */
+.skill-card,
+.project-card,
+.answer-card,
+.note-card {
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: var(--paper);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+/* Khoảng đệm bên trong card kỹ năng. */
+.skill-card {
+  padding: 1.45rem;
+}
+
+/* Hover hoặc focus link con đều nâng card nhẹ; :focus-within truyền phản hồi
+   của focus từ phần tử con lên toàn card mà không cần thêm tabindex. */
+.skill-card:hover,
+.project-card:hover,
+.skill-card:focus-within,
+.project-card:focus-within,
+.answer-card:hover,
+.answer-card:focus-within,
+.note-card:hover,
+.note-card:focus-within {
+  transform: translateY(-0.25rem);
+  border-color: #d4dce7;
+  box-shadow: 0 0.8rem 1.8rem rgb(25 37 54 / 6%);
+}
+
+/* Biểu tượng kỹ năng nằm giữa ô vuông có nền màu riêng. */
+.skill-icon {
+  display: grid;
+  width: 2.65rem;
+  height: 2.65rem;
+  place-items: center;
+  border-radius: 0.7rem;
+  font-family: Consolas, monospace;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+/* Mỗi kỹ năng có màu nền và màu biểu tượng riêng. */
+.icon-orange {
+  color: #d9562d;
+  background: #fff0e9;
+}
+
+/* Biến thể tím cho biểu tượng. */
+.icon-purple {
+  color: #725bc4;
+  background: #f0edff;
+}
+
+/* Biến thể xanh cho biểu tượng. */
+.icon-green {
+  color: #32815f;
+  background: #e8f7ef;
+}
+
+/* Tiêu đề card dùng chung kích thước và khoảng cách. */
+.skill-card h3,
+.project-body h3,
+.timeline-item h3,
+.answer-card h3,
+.note-card h3 {
+  margin: 1.1rem 0 0.5rem;
+  font-size: 1.08rem;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+
+/* Mô tả card giới hạn độ đậm và cỡ chữ để tiêu đề nổi bật hơn. */
+.skill-card>p,
+.project-body>p:not(.project-kicker),
+.timeline-item>p:last-child,
+.note-card>p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* Danh sách tag được trình bày theo hàng và tự xuống dòng khi cần. */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Tag là nhãn nhỏ có viền, bo tròn, không dùng dấu đầu dòng. */
+.tag-list li {
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: 10rem;
+  color: #59677a;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Hàng tiêu đề dự án căn tiêu đề và đoạn mô tả ở hai phía trên desktop. */
+.heading-row {
+  display: flex;
+  max-width: none;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Giới hạn độ rộng mô tả ở hàng tiêu đề để giữ nhịp đọc. */
+.heading-row>p {
+  max-width: 20rem;
+  padding-bottom: 0.85rem;
+}
+
+/* Cắt phần trang trí ảnh dự án ở ranh giới card. */
+.project-card {
+  overflow: hidden;
+}
+
+/* Vùng minh họa dự án giữ chiều cao tối thiểu và căn hình vào giữa. */
+.project-visual {
+  position: relative;
+  display: grid;
+  min-height: 12rem;
+  overflow: hidden;
+  place-items: center;
+}
+
+/* Mỗi loại dự án có nền minh họa riêng để phân biệt bằng thị giác. */
+.visual-portfolio {
+  background: linear-gradient(135deg, #fff0e7, #f8e5de);
+}
+
+/* Nền minh họa bố cục CSS. */
+.visual-layout {
+  background: linear-gradient(135deg, #eeeafe, #e1defb);
+}
+
+/* Nền minh họa form. */
+.visual-form {
+  background: linear-gradient(135deg, #e5f6ed, #d7eee2);
+}
+
+/* Nhãn nhỏ nằm sát đáy góc trái ảnh minh họa. */
+.visual-label {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 1rem;
+  color: #627085;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* Cửa sổ trình duyệt thu nhỏ chỉ là hình minh họa CSS, không phải iframe. */
+.mini-browser {
+  width: 12rem;
+  overflow: hidden;
+  border: 1px solid rgb(25 37 54 / 10%);
+  border-radius: 0.55rem;
+  background: white;
+  box-shadow: 0 0.9rem 2rem rgb(91 62 50 / 12%);
+  transform: rotate(-4deg);
+}
+
+/* Thanh trên cùng của trình duyệt thu nhỏ. */
+.mini-browser-bar {
+  display: flex;
+  gap: 0.22rem;
+  padding: 0.45rem;
+  background: #f5f6f8;
+}
+
+/* Dấu tròn trang trí trên thanh trình duyệt thu nhỏ. */
+.mini-browser-bar i {
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+  background: #e89b87;
+}
+
+/* Nội dung giả lập bên trong trình duyệt làm gốc cho avatar tuyệt đối. */
+.mini-content {
+  position: relative;
+  min-height: 6rem;
+  padding: 0.75rem;
+}
+
+/* Các thanh giả lập tiêu đề và dòng chữ trong bản xem trước. */
+.mini-content>span,
+.mini-content>b {
+  display: block;
+  width: 45%;
+  height: 0.3rem;
+  margin-bottom: 0.42rem;
+  border-radius: 2rem;
+  background: #e96740;
+}
+
+/* Thanh tiêu đề chính rộng hơn và dùng màu tối. */
+.mini-content>b {
+  width: 72%;
+  height: 0.5rem;
+  background: #24344a;
+}
+
+/* Thanh thứ hai ngắn và nhạt hơn thanh tiêu đề. */
+.mini-content>b:nth-of-type(2) {
+  width: 56%;
+  background: #a4adba;
+}
+
+/* Thanh màu tượng trưng cho nút trong bản xem trước. */
+.mini-content>em {
+  display: block;
+  width: 2rem;
+  height: 0.6rem;
+  margin-top: 0.8rem;
+  border-radius: 0.2rem;
+  background: #f5a082;
+}
+
+/* Hình tròn trang trí đại diện ảnh hồ sơ trong bản xem trước. */
+.mini-avatar {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.8rem;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f2ba9c, #df7455);
+}
+
+/* Lưới giả lập ba cột và hai hàng cho dự án layout. */
+.layout-window {
+  display: grid;
+  width: 11rem;
+  height: 7rem;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 0.7fr 1fr;
+  gap: 0.35rem;
+  padding: 0.6rem;
+  border: 1px solid rgb(59 47 112 / 10%);
+  border-radius: 0.6rem;
+  background: rgb(255 255 255 / 80%);
+  box-shadow: 0 0.8rem 1.8rem rgb(67 57 121 / 10%);
+  transform: rotate(3deg);
+}
+
+/* Ô nội dung lưới dùng nền tím nhạt. */
+.layout-window span {
+  border-radius: 0.25rem;
+  background: #d8d1fa;
+}
+
+/* Ô đầu trải qua ba cột, mô phỏng thanh tiêu đề. */
+.layout-window span:first-child {
+  grid-column: span 3;
+  background: #9a84ec;
+}
+
+/* Ô thứ ba có sắc độ khác để minh họa các khối không đồng nhất. */
+.layout-window span:nth-child(3) {
+  background: #c1b6f5;
+}
+
+/* Thẻ form thu nhỏ dùng grid để xếp các nhãn/trường giả lập. */
+.mini-form {
+  display: grid;
+  width: 10rem;
+  gap: 0.32rem;
+  padding: 0.8rem;
+  border: 1px solid rgb(41 101 71 / 10%);
+  border-radius: 0.55rem;
+  background: white;
+  box-shadow: 0 0.8rem 1.8rem rgb(39 101 70 / 10%);
+  transform: rotate(-3deg);
+}
+
+/* Các thanh nhỏ mô phỏng nhãn trường trong form. */
+.mini-form span {
+  width: 2.5rem;
+  height: 0.25rem;
+  margin-top: 0.12rem;
+  border-radius: 2rem;
+  background: #5b806b;
+}
+
+/* Các ô dài mô phỏng trường nhập. */
+.mini-form b {
+  height: 1rem;
+  border: 1px solid #dce8df;
+  border-radius: 0.25rem;
+  background: #f9fcfa;
+}
+
+/* Trường cuối ngắn hơn để tạo đa dạng cho hình minh họa. */
+.mini-form .short-field {
+  width: 70%;
+}
+
+/* Thanh nút gửi giả lập nằm ở cuối form. */
+.mini-form i {
+  width: 2.7rem;
+  height: 0.65rem;
+  margin-top: 0.2rem;
+  border-radius: 0.2rem;
+  background: #e98861;
+}
+
+/* Khoảng đệm riêng cho nội dung bên dưới ảnh dự án. */
+.project-body {
+  padding: 1.25rem;
+}
+
+/* Nhãn phân loại dự án dùng màu cam và cỡ chữ nhỏ. */
+.project-body .project-kicker {
+  color: var(--accent);
+  font-size: 0.65rem;
+}
+
+/* Tiêu đề dự án gần nhãn phân loại hơn so với mặc định chung của card. */
+.project-body h3 {
+  margin-top: 0.55rem;
+}
+
+/* Link hành động trong card dự án. */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.1rem;
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+/* Mũi tên dùng màu nhấn và transition ở trạng thái gốc. */
+.text-link span,
+.back-top span {
+  color: var(--accent);
+  transition: transform 180ms ease;
+}
+
+/* Hover dịch mũi tên sang phải để bổ sung phản hồi cho link. */
+.text-link:hover span,
+.back-top:hover span {
+  transform: translateX(0.2rem);
+}
+
+/* Nền tối cho phần lộ trình; đổi màu chữ mặc định để đủ tương phản. */
+.section-dark {
+  color: #f2f5f9;
+  background: var(--navy);
+}
+
+/* Lộ trình xếp dọc trên mobile, chia cột ở màn hình rộng hơn. */
+.learning-grid {
+  display: grid;
+  gap: 3rem;
+}
+
+/* Trên nền tối, nhãn và mô tả dùng màu sáng dịu để giữ khả năng đọc. */
+.section-dark .eyebrow,
+.section-dark .section-heading>p:last-child {
+  color: #a9b7c8;
+}
+
+/* Tiêu đề phần tối dùng màu trắng. */
+.section-dark .section-heading h2 {
+  color: white;
+}
+
+/* Nút viền trên nền tối; giữ tương phản chữ trắng. */
+.button-outline {
+  margin-top: 1.6rem;
+  border-color: rgb(255 255 255 / 24%);
+  color: white;
+}
+
+/* Hover thêm nền trong suốt và làm viền nổi bật hơn. */
+.button-outline:hover {
+  border-color: rgb(255 255 255 / 50%);
+  background: rgb(255 255 255 / 8%);
+}
+
+/* Timeline tự vẽ đường thời gian bằng viền trái của từng mục. */
+.timeline {
+  margin: 0;
+  padding: 0 0 0 1.4rem;
+  list-style: none;
+}
+
+/* Mỗi mục timeline có đường nối và khoảng cách với mục kế tiếp. */
+.timeline-item {
+  position: relative;
+  padding: 0 0 2rem 1.25rem;
+  border-left: 1px solid rgb(255 255 255 / 19%);
+}
+
+/* Mục cuối bỏ đoạn đường nối thừa bên dưới. */
+.timeline-item:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+/* Chấm mốc đặt chồng lên đường timeline. */
+.timeline-marker {
+  position: absolute;
+  top: 0.1rem;
+  left: -0.38rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 2px solid #8190a4;
+  border-radius: 50%;
+  background: var(--navy);
+}
+
+/* Mốc hiện tại nổi bật bằng màu cam và quầng sáng. */
+.is-current .timeline-marker {
+  border-color: #ee8a62;
+  background: var(--accent);
+  box-shadow: 0 0 0 0.25rem rgb(231 101 59 / 17%);
+}
+
+/* Ngày/mô tả trạng thái trên nền tối dùng chữ nhỏ, sáng. */
+.timeline-date {
+  color: #a9b7c8;
+  font-size: 0.65rem;
+}
+
+/* Nhãn trạng thái hiện tại dùng màu cam nhạt. */
+.is-current .timeline-date {
+  color: #f39a76;
+}
+
+/* Tiêu đề các mốc dùng màu trắng để phân biệt với mô tả. */
+.timeline-item h3 {
+  margin: 0.5rem 0;
+  color: white;
+}
+
+/* Mô tả mốc giới hạn chiều rộng, màu sáng dịu trên nền tối. */
+.timeline-item>p:last-child {
+  max-width: 27rem;
+  color: #bdc8d5;
+}
+
+/* Cột liên hệ xếp dọc trên mobile và chuyển thành hai cột tại breakpoint. */
+.contact-grid {
+  display: grid;
+  align-items: start;
+  gap: 2.5rem;
+}
+
+/* Khoảng cách tiêu đề phần liên hệ được tinh chỉnh riêng. */
+.contact-copy h2 {
+  margin-top: 0.7rem;
+}
+
+/* Đoạn giới thiệu form không kéo dài quá rộng. */
+.contact-copy>p:not(.eyebrow) {
+  max-width: 30rem;
+}
+
+/* Hộp lưu ý dùng nền ấm và bố cục flex để icon không đẩy chữ. */
+.contact-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.9rem;
+  border: 1px solid #f1dfd5;
+  border-radius: 0.6rem;
+  background: #fff8f4;
+}
+
+/* Hộp lưu ý cạnh phần giới thiệu có giới hạn chiều rộng và khoảng cách trên. */
+.contact-copy .contact-note {
+  max-width: 27rem;
+  margin-top: 1.35rem;
+}
+
+/* Icon thông tin là hình tròn cố định, căn giữa chữ i. */
+.note-icon {
+  display: grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  color: white;
+  background: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Nội dung lưu ý nhỏ, màu nâu đậm trên nền ấm. */
+.contact-note p {
+  margin: 0;
+  color: #79513f;
+  font-size: 0.78rem;
+}
+
+/* Link email trình bày thành hàng và có biểu tượng mở liên kết. */
+.contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.5rem;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+/* Mũi tên email lấy màu điểm nhấn. */
+.contact-email span {
+  color: var(--accent);
+}
+
+/* min-width: 0 cho phép form co theo cột grid, không đẩy tràn viewport. */
+.contact-form {
+  min-width: 0;
+  padding: clamp(1.15rem, 4vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: white;
+  box-shadow: 0 1rem 3rem rgb(25 37 54 / 6%);
+}
+
+/* Tiêu đề form cho phép xuống dòng khi màn hình hẹp. */
+.form-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1.4rem;
+}
+
+/* Nhãn nhỏ đầu form dùng màu chữ chính. */
+.form-step {
+  color: var(--ink);
+}
+
+/* Chú thích trường bắt buộc dùng màu phụ. */
+.form-required {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+/* Dấu sao trong chú thích và label dùng màu nhấn. */
+.form-required span,
+.form-field label span {
+  color: var(--accent);
+}
+
+/* Mỗi trường nhập có khoảng cách trên và được phép co trong cột form. */
+.form-field {
+  min-width: 0;
+  margin-top: 1rem;
+}
+
+/* Label hiển thị trên trường nhập, giúp giữ liên kết và vùng bấm rõ ràng. */
+.form-field label {
+  display: block;
+  margin-bottom: 0.38rem;
+  color: #344256;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+/* Input và textarea chiếm hết chiều rộng cột; border-box ở đầu file giúp
+   padding/viền nằm trong width: 100%, tránh tràn trên màn hình nhỏ. */
+.form-field input,
+.form-field textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 0.75rem;
+  border: 1px solid #dce3eb;
+  border-radius: 0.45rem;
+  color: var(--ink);
+  background: white;
+  font-size: 0.88rem;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+/* Placeholder dịu hơn dữ liệu nhập, vẫn đủ phân biệt với label. */
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: #9aa5b3;
+}
+
+/* Khi con trỏ vào trường, đổi viền và thêm quầng nhẹ; outline bàn phím
+   vẫn được giữ bởi :focus-visible ở phần reset chung đầu file. */
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 0.2rem rgb(240 107 61 / 11%);
+}
+
+/* Textarea cao tối thiểu và chỉ cho phép kéo dọc để không phá bố cục ngang. */
+.form-field textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+/* Hướng dẫn aria-describedby dưới textarea dùng cỡ nhỏ và màu phụ. */
+.field-help {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+/* Tạo khoảng cách giữa các trường và cụm nút form. */
+.form-actions {
+  margin-top: 1.25rem;
+}
+
+/* Nút xóa là hành động phụ, không cạnh tranh với nút gửi. */
+.button-reset {
+  border-color: var(--line);
+  color: #48566a;
+  background: white;
+}
+
+/* Giải thích cách kiểm tra form đặt dưới các nút với cỡ chữ nhỏ. */
+.form-footnote {
+  margin: 0.9rem 0 0;
+  color: #7b8797;
+  font-size: 0.73rem;
+}
+
+/* Footer phân cách nội dung bằng đường viền nhẹ. */
+.site-footer {
+  border-top: 1px solid var(--line);
+  background: #fbfcfd;
+}
+
+/* Chiều cao tối thiểu cho hàng footer desktop. */
+.footer-inner {
+  min-height: 5rem;
+}
+
+/* Chú thích và dòng phụ trong footer dùng cỡ chữ nhỏ. */
+.footer-inner>p,
+.footer-inner>span {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.77rem;
+}
+
+/* Logo footer nhỏ hơn logo đầu trang. */
+.footer-brand {
+  font-size: 0.9rem;
+}
+
+/* Thu gọn ô biểu tượng logo trong footer. */
+.footer-brand .brand-mark {
+  width: 1.75rem;
+  border-radius: 0.5rem;
+}
+
+/* Link trở lại đầu trang được căn theo hàng với mũi tên. */
+.back-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #465469;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* Trang kết quả dùng flex để footer nằm cuối màn hình kể cả khi ít nội dung. */
+.result-page {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+/* Nội dung kết quả căn giữa theo cả hai chiều; nền chỉ có tác dụng trang trí. */
+.result-main {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  padding: 3rem 1.25rem;
+  background: radial-gradient(ellipse at 50% 25%, #fff0e8, transparent 30rem), #f7f9fc;
+}
+
+/* Khung thông báo giới hạn chiều rộng để đoạn văn dễ đọc. */
+.result-card {
+  width: min(100%, 39rem);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 1rem 3rem rgb(25 37 54 / 7%);
+}
+
+/* Dấu kiểm thị giác cho biết form đã qua kiểm tra trình duyệt,
+   không có nghĩa dữ liệu đã được gửi tới máy chủ. */
+.result-icon {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1.2rem;
+  place-items: center;
+  border-radius: 50%;
+  color: #287853;
+  background: #e8f7ef;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+/* Tiêu đề kết quả và tiêu đề trang bài luyện chia sẻ kiểu chữ co giãn. */
+.result-card h1,
+.practice-hero h1 {
+  margin: 0.55rem 0 0.8rem;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.065em;
+}
+
+/* Đoạn nội dung thông báo dùng màu phụ. */
+.result-card>p:not(.eyebrow) {
+  color: var(--muted);
+}
+
+/* Khoảng cách cho lời nhắc an toàn trên trang kết quả. */
+.result-warning {
+  margin-block: 1.4rem;
+}
+
+/* Nút quay lại tách khỏi phần cảnh báo. */
+.result-card .button {
+  margin-top: 0.4rem;
+}
+
+/* Phần đầu của trang đáp án dùng nền gradient nhẹ và khoảng cách riêng. */
+.practice-hero {
+  padding-block: 4.5rem;
+  background:
+    radial-gradient(ellipse at 84% 30%, rgb(231 101 59 / 8%), transparent 25rem),
+    #fff;
+}
+
+/* Giới hạn tiêu đề trang bài luyện. */
+.practice-hero h1 {
+  max-width: 43rem;
+}
+
+/* Mô tả trang bài luyện giữ độ rộng dễ đọc. */
+.practice-hero .container>p:not(.eyebrow) {
+  max-width: 42rem;
+  margin: 0 0 1.4rem;
+  color: var(--muted);
+}
+
+/* Lưới đáp án xếp một cột trên mobile, chia cột tại các breakpoint bên dưới. */
+.answer-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Thẻ đáp án và ghi chú có cùng khoảng đệm. */
+.answer-card,
+.note-card {
+  padding: 1.35rem;
+}
+
+/* Mã nhiệm vụ trong thẻ đáp án dùng màu nhấn. */
+.answer-card .project-kicker {
+  color: var(--accent);
+  font-size: 0.65rem;
+}
+
+/* Tiêu đề từng nhiệm vụ đặt gần nhãn mã. */
+.answer-card h3 {
+  margin-top: 0.5rem;
+}
+
+/* Danh sách cặp mã ô/đáp án đặt dưới tiêu đề nhiệm vụ. */
+.answer-list {
+  margin: 1rem 0 0;
+}
+
+/* Mỗi cặp dùng grid: cột mã cố định, cột đáp án co giãn. */
+.answer-list>div {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0.5rem;
+  padding-block: 0.4rem;
+  border-top: 1px solid #edf0f4;
+}
+
+/* Mã ô là nhãn phụ, căn cùng dòng với giá trị tương ứng. */
+.answer-list dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* dd không nhận margin mặc định và có thể co trong grid. */
+.answer-list dd {
+  min-width: 0;
+  margin: 0;
+}
+
+/* Định dạng mã/giá trị CSS trong ghi chú và đáp án. */
+code {
+  padding: 0.12rem 0.3rem;
+  border-radius: 0.25rem;
+  color: #9d4627;
+  background: #fff1eb;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.86em;
+  overflow-wrap: anywhere;
+}
+
+/* Giới hạn chiều rộng tiêu đề ghi chú. */
+.notes-container .section-heading {
+  max-width: 43rem;
+}
+
+/* Tiêu đề từng ghi chú bắt đầu ngang với nội dung. */
+.note-card h3 {
+  margin-top: 0;
+}
+
+/* Mã inline trong ghi chú nhỏ vừa với văn bản xung quanh. */
+.note-card code {
+  font-size: 0.78rem;
+}
+
+/* Tách cảnh báo cuối trang bài luyện khỏi các ghi chú. */
+.practice-disclaimer {
+  margin-top: 1.3rem;
+}
+
+/* Từ 48rem (~768px): bật bố cục hai cột cho hero và các lưới.
+   minmax(0, 1fr) cho phép cột co theo nội dung thay vì gây tràn ngang. */
+@media (min-width: 48rem) {
+
+  /* Hero chia phần giới thiệu và minh họa thành hai cột tỷ lệ gần nhau. */
+  .hero-grid {
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: 1.5rem;
+  }
+
+  /* Các card chuyển từ một cột sang hai cột. */
+  .skills-grid,
+  .projects-grid,
+  .notes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Dự án đầu tiên nổi bật bằng cách trải qua cả hai cột ở tablet. */
+  .project-featured {
+    grid-column: span 2;
+  }
+
+  /* Tăng chiều cao ảnh minh họa của dự án nổi bật. */
+  .project-featured .project-visual {
+    min-height: 15rem;
+  }
+
+  /* Phần lộ trình chia nội dung giới thiệu và timeline thành hai cột. */
+  .learning-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  /* Phần liên hệ đặt phần giới thiệu cạnh form. */
+  .contact-grid {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 3rem;
+  }
+
+  /* Bảng đáp án dùng hai cột trên tablet. */
+  .answer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Từ 64rem (~1024px): tăng khoảng thở và chuyển các lưới chính sang ba cột. */
+@media (min-width: 64rem) {
+
+  /* Tăng khoảng cách dọc ở desktop. */
+  .section {
+    padding-block: 6.5rem;
+  }
+
+  /* Hero desktop có chiều cao lớn hơn để cân đối hai cột. */
+  .hero {
+    min-height: 40rem;
+  }
+
+  /* Tăng khoảng cách giữa chữ và hình minh họa. */
+  .hero-grid {
+    gap: 3rem;
+  }
+
+  /* Kỹ năng, dự án và ghi chú hiển thị ba cột trên màn hình rộng. */
+  .skills-grid,
+  .projects-grid,
+  .notes-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Dự án nổi bật trở về kích thước một cột khi có đủ không gian. */
+  .project-featured {
+    grid-column: auto;
+  }
+
+  /* Trả chiều cao ảnh dự án nổi bật về mức tiêu chuẩn desktop. */
+  .project-featured .project-visual {
+    min-height: 12rem;
+  }
+
+  /* Bảng đáp án có ba cột trên desktop. */
+  .answer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tối ưu cho viewport dưới 48rem; quy tắc này bổ sung chi tiết cho mobile
+   sau khi bố cục cơ sở đã được khai báo theo hướng mobile-first. */
+@media (max-width: 47.99rem) {
+
+  /* Header xếp logo và menu thành hai hàng để tránh chen chúc. */
+  .header-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding-block: 0.7rem;
+  }
+
+  /* Menu mobile căn về đầu hàng và chiếm hết chiều rộng header. */
+  .site-nav {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0;
+  }
+
+  /* Giảm vùng đệm link để các mục menu vừa màn hình nhỏ. */
+  .site-nav a {
+    padding: 0.45rem 0.52rem;
+    font-size: 0.76rem;
+  }
+
+  /* Hero chỉ cao theo nội dung trên mobile, không giữ chiều cao desktop. */
+  .hero {
+    min-height: auto;
+    padding-block: 4rem 5rem;
+  }
+
+  /* Giảm khoảng cách giữa nội dung và hình minh họa khi xếp dọc. */
+  .hero-grid {
+    gap: 1.5rem;
+  }
+
+  /* Thu chiều cao tối thiểu vùng hình minh họa mobile. */
+  .hero-art {
+    min-height: 17rem;
+  }
+
+  /* Hàng tiêu đề xếp dọc thay vì đặt mô tả cạnh tiêu đề. */
+  .heading-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Bỏ phần đệm đáy dành cho bố cục ngang desktop. */
+  .heading-row>p {
+    padding-bottom: 0;
+  }
+
+  /* Footer được phép xuống dòng; padding tạo khoảng cách với mép màn hình. */
+  .footer-inner {
+    min-height: auto;
+    flex-wrap: wrap;
+    padding-block: 1rem;
+    gap: 0.6rem 1rem;
+  }
+
+  /* Chú thích footer chiếm trọn hàng riêng trên màn hình nhỏ. */
+  .footer-inner>p {
+    order: 1;
+    width: 100%;
+  }
+}
+
+/* Điện thoại rất hẹp (dưới 22rem): giảm lề và tránh nút bị bóp nhỏ. */
+@media (max-width: 22rem) {
+
+  /* Tăng phần không gian nội dung bằng cách giảm lề hai bên. */
+  .container {
+    width: calc(100% - 1.5rem);
+  }
+
+  /* Thu gọn menu thêm để giữ đủ năm mục điều hướng. */
+  .site-nav a {
+    padding-inline: 0.38rem;
+    font-size: 0.72rem;
+  }
+
+  /* Cỡ tiêu đề cố định ở mức vừa với viewport hẹp. */
+  .hero h1 {
+    font-size: 2.45rem;
+  }
+
+  /* Nút xếp toàn chiều rộng để dễ bấm trên thiết bị nhỏ. */
+  .hero-actions .button,
+  .form-actions .button {
+    width: 100%;
+  }
+
+  /* Nhãn nổi nhỏ lại để không che hình minh họa. */
+  .floating-chip {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Tôn trọng tùy chọn giảm chuyển động của hệ điều hành/người dùng.
+   Nội dung và trạng thái vẫn giữ nguyên; chỉ giảm animation/transition. */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
