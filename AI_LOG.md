@@ -3,17 +3,19 @@
 ### Bối cảnh và quan sát
 
 - Phản hồi ban đầu: màu giao diện không hiển thị và không nhập được chữ ở phần liên hệ.
-- Kiểm tra trang `index.html` trên trình duyệt cục bộ: stylesheet `css/style.css` được tải; màu nền, màu chữ và nút chính được áp dụng. Các trường nhập không bị `disabled` hoặc `readonly`, và có thể nhập dữ liệu thử nghiệm.
-- Tệp `ai_log.md` ban đầu chỉ ghi lại hai dòng phản hồi này; nội dung được chuyển thành nhật ký có quan sát, quyết định và kết quả kiểm thử trong `AI_LOG.md`.
+- Commit `f187b86` đã vô tình đổi đường dẫn stylesheet trong `index.html` từ `css/style.css` thành `css/`. Trình duyệt không thể nạp tệp CSS, khiến giao diện mất màu và định dạng.
+- Lần kiểm tra trình duyệt trước đó diễn ra trước thay đổi này nên không phản ánh đúng phiên bản mới nhất. URL GitHub Pages cũng trả HTTP 404; không có bản triển khai trực tuyến để đối chiếu.
 
 ### Quyết định và thay đổi
 
-- Không thêm JavaScript và không đổi cách gửi biểu mẫu tĩnh, vì lỗi nhập liệu không tái hiện được.
-- Tăng cỡ chữ trường nhập lên 16px để tránh phóng to trang ngoài ý muốn trên một số điện thoại; thêm màu con trỏ và trạng thái viền khi rê chuột.
-- Sửa liên kết email để khớp địa chỉ đang hiển thị trên trang.
+- Khôi phục liên kết chính xác tới `css/style.css`; không thêm JavaScript vì biểu mẫu không cần mã phía máy khách để nhận dữ liệu và kiểm tra ràng buộc HTML.
+- Giữ cỡ chữ trường nhập 16px, màu con trỏ và viền hover/focus để vùng nhập dễ nhận biết, đồng thời hạn chế tự phóng to trên điện thoại.
+- Sửa liên kết email để khớp địa chỉ hiển thị.
 
 ### Kiểm chứng
 
-- Đã kiểm tra stylesheet được trình duyệt tải và các màu giao diện được áp dụng.
-- Đã nhập dữ liệu giả, gửi biểu mẫu và xác nhận trang kết quả mô phỏng cảnh báo rằng email không được gửi.
-- Cần kiểm tra lại URL GitHub Pages sau khi bật triển khai; lần kiểm tra hiện tại trả về HTTP 404.
+- Máy chủ HTTP cục bộ trả HTTP 200 cho `index.html` và `css/style.css`.
+- Trình duyệt xác nhận stylesheet có 192 quy tắc, màu nút chính được áp dụng, trường nhập hiển thị cỡ chữ 16px và nhận dữ liệu.
+- Ở viewport 375px (chiều rộng trang khả dụng 360px), chiều rộng tài liệu bằng chiều rộng viewport, không tràn ngang.
+- Biểu mẫu hợp lệ với dữ liệu giả, mở `ket-qua.html` và hiển thị cảnh báo không gửi email; dữ liệu GET xuất hiện trong URL.
+- URL GitHub Pages vẫn trả HTTP 404. Cần bật/khôi phục deploy, xác nhận URL công khai, ghi SHA bản deploy và bổ sung ảnh minh chứng/video.

@@ -30,7 +30,16 @@ Tệp chính:
 - URL Pages dự kiến: <https://hieu492003.github.io/2071020070_khoangtrunghieu_lab5/>
 - Nguồn triển khai phù hợp với cấu trúc hiện tại: nhánh `main`, thư mục gốc `/` (nơi đặt `index.html`).
 
-**Trạng thái:** URL Pages trả về HTTP 404 trong lần kiểm tra ngày 30/10/2026. Cần bật GitHub Pages trong Settings → Pages, chọn nhánh `main` và thư mục `/(root)`, sau đó chờ deploy và kiểm tra lại URL trước khi nộp.
+**Trạng thái:** URL Pages và API cấu hình Pages trả về HTTP 404 trong lần kiểm tra ngày 30/10/2026; chưa xác nhận có bản triển khai công khai. Sau khi push bản sửa, kiểm tra Settings → Pages; nếu chưa bật, chọn nhánh `main` và thư mục `/(root)`, đợi deploy rồi kiểm tra lại URL trước khi nộp.
+
+## Cải tiến giao diện và kiểm chứng
+
+- **Vấn đề trước khi sửa:** `index.html` trỏ tới `css/` thay vì `css/style.css`; stylesheet không được nạp nên giao diện mất màu, bố cục và trạng thái focus.
+- **Tiêu chí:** trang phải nạp stylesheet cục bộ, giữ bố cục responsive, thể hiện màu nhận diện và cho phép nhìn rõ con trỏ/focus trong trường nhập.
+- **Cách sửa:** khôi phục đường dẫn stylesheet; giữ cỡ chữ 16px và trạng thái hover/focus của các trường nhập.
+- **Kiểm chứng cục bộ:** máy chủ HTTP trả 200 cho `index.html` và `css/style.css`; trình duyệt áp dụng màu nút, trường nhập 16px, nhập được dữ liệu và không tràn ngang ở viewport 375px. Biểu mẫu hợp lệ mở trang kết quả mô phỏng; chỉ dùng dữ liệu giả vì GET đưa dữ liệu vào URL.
+- **Kiểm chứng công khai:** chưa thực hiện thành công; URL GitHub Pages hiện trả HTTP 404.
+- **Minh chứng:** cần chụp ảnh trước/sau trên cùng viewport và ảnh Network của bản sau khi sửa; bổ sung link ảnh hoặc video demo tại đây sau khi lưu minh chứng. Không đánh dấu deploy là hoàn tất trước khi URL công khai mở được.
 
 ## Thông tin nộp LMS
 
