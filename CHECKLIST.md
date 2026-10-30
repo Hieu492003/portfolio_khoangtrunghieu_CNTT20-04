@@ -18,9 +18,11 @@ Trạng thái ghi theo bằng chứng hiện có. Không đánh dấu hoàn tấ
 - Repository: <https://github.com/Hieu492003/2071020070_khoangtrunghieu_lab5>
 - Nhánh dự kiến: `main`; thư mục nguồn: `/ (root)`.
 - URL Pages dự kiến: <https://hieu492003.github.io/2071020070_khoangtrunghieu_lab5/>.
-- Trạng thái lần kiểm tra 30/10/2026: Pages trả HTTP 404; chưa xác minh bản công khai.
+- SHA mã nguồn đã kiểm thử và push: `fe942990948ca1db8a9722e42523222bd71fa176`.
+- Trạng thái lần kiểm tra 30/10/2026: Pages và CSS trả HTTP 404; chưa xác minh bản công khai.
 - [ ] Kiểm tra Settings → Pages; bật deploy từ `main` / `/(root)` nếu chưa cấu hình.
-- [ ] Push commit sửa lỗi và chờ deploy hoàn tất.
+- [x] Push commit sửa lỗi `fe942990948ca1db8a9722e42523222bd71fa176` lên `main`.
+- [ ] Chờ deploy hoàn tất; hiện URL Pages trả HTTP 404.
 - [ ] Mở URL Pages ở cửa sổ riêng; kiểm tra CSS, ảnh/liên kết và form.
 - [ ] Ghi SHA commit khớp với bản đã kiểm chứng/deploy.
 

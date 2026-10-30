@@ -51,6 +51,6 @@ Tệp chính:
 | Link repository | <https://github.com/Hieu492003/2071020070_khoangtrunghieu_lab5> |
 | URL GitHub Pages đã kiểm tra | Chưa triển khai; URL dự kiến ở trên |
 | Nhánh / thư mục nguồn | `main` / `/ (root)` |
-| SHA bản cuối đã kiểm chứng | Điền sau khi commit, push và kiểm tra bản deploy |
+| SHA mã nguồn đã kiểm thử và push | `fe942990948ca1db8a9722e42523222bd71fa176` (chưa xác nhận được bản deploy vì URL Pages trả HTTP 404) |
 | Hồ sơ | README, AI_LOG, RELEASE_NOTES và CHECKLIST trong repository |
 | Minh chứng / demo | Bổ sung ảnh Network, ảnh cải tiến giao diện và video demo sau khi deploy |

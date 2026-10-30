@@ -18,4 +18,5 @@
 - Trình duyệt xác nhận stylesheet có 192 quy tắc, màu nút chính được áp dụng, trường nhập hiển thị cỡ chữ 16px và nhận dữ liệu.
 - Ở viewport 375px (chiều rộng trang khả dụng 360px), chiều rộng tài liệu bằng chiều rộng viewport, không tràn ngang.
 - Biểu mẫu hợp lệ với dữ liệu giả, mở `ket-qua.html` và hiển thị cảnh báo không gửi email; dữ liệu GET xuất hiện trong URL.
-- URL GitHub Pages vẫn trả HTTP 404. Cần bật/khôi phục deploy, xác nhận URL công khai, ghi SHA bản deploy và bổ sung ảnh minh chứng/video.
+- Commit `fe942990948ca1db8a9722e42523222bd71fa176` đã được push lên `main`.
+- URL GitHub Pages và CSS vẫn trả HTTP 404. Cần bật/khôi phục deploy, xác nhận URL công khai và bổ sung ảnh minh chứng/video.

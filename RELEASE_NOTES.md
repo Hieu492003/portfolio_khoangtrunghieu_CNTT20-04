@@ -18,5 +18,5 @@
 ### Hạn chế và bàn giao
 
 - Biểu mẫu là mô phỏng tĩnh, không gửi email và không lưu dữ liệu.
-- Chưa có ảnh minh chứng trước/sau, video demo hoặc SHA commit cuối trong hồ sơ này.
-- Cần hoàn tất cấu hình Pages, push bản cuối và cập nhật trạng thái trong [CHECKLIST.md](./CHECKLIST.md).
+- Mã nguồn đã push tại commit `fe942990948ca1db8a9722e42523222bd71fa176`; chưa có ảnh minh chứng trước/sau hoặc video demo được lưu trong repository.
+- Cần bật/cấu hình Pages, xác nhận URL công khai và bổ sung minh chứng; theo dõi các mục còn lại trong [CHECKLIST.md](./CHECKLIST.md).
