@@ -1171,8 +1171,15 @@ h3 {
   border-radius: 0.45rem;
   color: var(--ink);
   background: white;
-  font-size: 0.88rem;
+  font-size: 1rem;
+  caret-color: var(--accent);
   transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+/* Làm rõ đây là vùng nhập có thể tương tác khi rê chuột. */
+.form-field input:hover,
+.form-field textarea:hover {
+  border-color: #aab7c6;
 }
 
 /* Placeholder dịu hơn dữ liệu nhập, vẫn đủ phân biệt với label. */
