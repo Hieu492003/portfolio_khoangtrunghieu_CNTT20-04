@@ -352,186 +352,40 @@ h3 {
   font-size: 0.8rem;
 }
 
-/* Vùng minh họa làm gốc định vị cho các hình trang trí tuyệt đối. */
+/* Căn ảnh chân dung và chú thích trong cột giới thiệu. */
 .hero-art {
-  position: relative;
   display: grid;
-  min-height: 19rem;
-  place-items: center;
-  isolation: isolate;
+  justify-items: center;
+  gap: 1rem;
+  margin: 0;
 }
 
-/* Các vòng trang trí đặt phía sau card, không chiếm chỗ trong luồng bố cục. */
-.art-orbit {
-  position: absolute;
-  z-index: -1;
-  border: 1px solid rgb(231 101 59 / 14%);
-  border-radius: 50%;
-}
-
-/* Vòng nhỏ và lớn tạo nhiều lớp chiều sâu quanh minh họa. */
-.orbit-one {
-  width: 19rem;
-  aspect-ratio: 1;
-}
-
-/* Vòng ngoài đổi viền nhạt hơn để không cạnh tranh với nội dung. */
-.orbit-two {
-  width: 24rem;
-  aspect-ratio: 1;
-  border-color: rgb(20 36 58 / 7%);
-}
-
-/* Thẻ minh họa mã giả: giới hạn chiều rộng, cắt nội dung thừa và tạo bóng. */
-.code-card {
-  z-index: 1;
+.portrait-frame {
   width: min(100%, 22rem);
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: 0.9rem;
-  color: #dae6f5;
-  background: #17283e;
-  box-shadow: 0 1.5rem 4rem rgb(24 40 61 / 20%);
-  transform: rotate(-2deg);
-  transition: transform 180ms ease;
+  aspect-ratio: 4 / 5;
+  border: 0.6rem solid white;
+  border-radius: 48% 48% 1.2rem 1.2rem;
+  background: var(--soft);
+  box-shadow: 0 1.5rem 4rem rgb(24 40 61 / 16%);
+  transform: rotate(2deg);
 }
 
-/* Rê chuột làm thẻ thẳng nhẹ và nâng lên; không thay đổi kích thước bố cục. */
-.code-card:hover {
-  transform: rotate(0) translateY(-0.25rem);
+.portrait-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
 }
 
-/* Thanh tiêu đề giả lập cửa sổ trình soạn thảo. */
-.code-top {
-  display: flex;
-  height: 2.9rem;
-  align-items: center;
-  gap: 0.4rem;
-  padding-inline: 1rem;
-  border-bottom: 1px solid rgb(255 255 255 / 8%);
-}
-
-/* Ba chấm màu biểu thị nút cửa sổ trang trí. */
-.code-top>span {
-  width: 0.52rem;
-  height: 0.52rem;
-  border-radius: 50%;
-  background: #ee7761;
-}
-
-/* Chấm thứ hai dùng màu vàng. */
-.code-top>span:nth-child(2) {
-  background: #e7b75a;
-}
-
-/* Chấm thứ ba dùng màu xanh. */
-.code-top>span:nth-child(3) {
-  background: #64ba8c;
-}
-
-/* Tên tệp được đẩy sang phải trong thanh tiêu đề. */
-.code-top small {
-  margin-left: auto;
-  color: #9cabc0;
-  font-size: 0.7rem;
-}
-
-/* Khối mã giả dùng font monospace để giống trình soạn thảo. */
-.code-lines {
-  padding: 1.1rem 1rem;
-  font-family: Consolas, "Courier New", monospace;
-  font-size: 0.77rem;
-}
-
-/* Mỗi dòng có khoảng cách dọc đều, không phụ thuộc margin mặc định của p. */
-.code-lines p {
-  margin: 0.8rem 0;
-}
-
-/* Màu riêng cho số dòng, thẻ và văn bản trong minh họa mã. */
-.code-muted {
-  color: #6b7c92;
-}
-
-/* Tô màu cú pháp minh họa. */
-.code-purple {
-  color: #c4a5ff;
-}
-
-/* Tô màu cú pháp minh họa. */
-.code-blue {
-  color: #75c9e8;
-}
-
-/* Chân thẻ mã đặt thông điệp trạng thái và đường phân cách. */
-.code-footer {
+.portrait-caption {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.8rem 1rem;
-  border-top: 1px solid rgb(255 255 255 / 8%);
-  color: #a7b5c7;
-  font-size: 0.72rem;
-}
-
-/* Nhãn nổi đặt tuyệt đối trong vùng minh họa, phía trên các vòng trang trí. */
-.floating-chip {
-  position: absolute;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.55rem 0.8rem;
-  border: 1px solid var(--line);
-  border-radius: 0.6rem;
-  background: white;
-  box-shadow: 0 0.5rem 1.5rem rgb(31 47 69 / 8%);
-  font-size: 0.76rem;
-  font-weight: 700;
-}
-
-/* Biểu tượng trong nhãn nổi lấy màu nhấn mặc định. */
-.floating-chip span {
-  color: var(--accent);
-  font-size: 1rem;
-}
-
-/* Vị trí nhãn công nghệ HTML trên vùng minh họa. */
-.chip-html {
-  top: 15%;
-  left: 0;
-}
-
-/* Vị trí nhãn công nghệ CSS đối diện nhãn HTML. */
-.chip-css {
-  right: 0;
-  bottom: 12%;
-}
-
-/* Biểu tượng CSS dùng màu tím để phân biệt nhãn. */
-.chip-css span {
-  color: var(--purple);
-}
-
-/* Các ký hiệu trang trí đặt tuyệt đối và không tham gia bố cục. */
-.hero-spark {
-  position: absolute;
-  color: var(--accent);
-}
-
-/* Vị trí và kích thước ký hiệu trang trí phía trên. */
-.spark-one {
-  top: 12%;
-  right: 12%;
-  font-size: 1.4rem;
-}
-
-/* Ký hiệu phía dưới đổi màu để tạo cân bằng thị giác. */
-.spark-two {
-  bottom: 16%;
-  left: 5%;
-  color: var(--purple);
-  font-size: 1.1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 /* Gợi ý cuộn được căn giữa đáy hero; transform chỉ dùng để căn vị trí. */
@@ -1562,6 +1416,10 @@ code {
     min-height: 17rem;
   }
 
+  .portrait-frame {
+    width: min(78%, 19rem);
+  }
+
   /* Hàng tiêu đề xếp dọc thay vì đặt mô tả cạnh tiêu đề. */
   .heading-row {
     align-items: flex-start;
@@ -1614,11 +1472,6 @@ code {
     width: 100%;
   }
 
-  /* Nhãn nổi nhỏ lại để không che hình minh họa. */
-  .floating-chip {
-    padding: 0.45rem 0.6rem;
-    font-size: 0.7rem;
-  }
 }
 
 /* Tôn trọng tùy chọn giảm chuyển động của hệ điều hành/người dùng.

@@ -1,56 +1,50 @@
 # Portfolio cá nhân — Khoàng Trung Hiếu
 
-Portfolio tĩnh được xây dựng bằng HTML và CSS cho học phần **FIT4014 — Thiết kế Web và triển khai hệ thống phần mềm**. Đây là bản bàn giao portfolio v7 cho bài đánh giá A2.2.
+## Sản phẩm này là gì?
 
-## Nội dung
+Portfolio tĩnh giới thiệu bản thân, kỹ năng, dự án học tập, lộ trình và thông tin liên hệ của sinh viên FIT4014.
 
-- Giới thiệu, kỹ năng, dự án và lộ trình học tập.
-- Bố cục responsive, điều hướng tới các phần và trạng thái focus cho bàn phím.
-- Biểu mẫu liên hệ có kiểm tra dữ liệu HTML5. Biểu mẫu chỉ mô phỏng; không gửi email và không lưu dữ liệu.
-- Trang [ket-qua.html](./ket-qua.html) giải thích kết quả gửi thử.
+## Demo
 
-## Chạy và kiểm tra trên máy
+Repository: <https://github.com/Hieu492003/portfolio_khoangtrunghieu_CNTT20-04>
 
-1. Tải hoặc clone repository.
-2. Mở `index.html` trực tiếp trong trình duyệt, hoặc mở thư mục bằng VS Code và chạy bằng tiện ích Live Server.
-3. Kiểm tra các liên kết điều hướng, CSS responsive và biểu mẫu ở cuối trang. Dùng dữ liệu giả khi thử gửi: biểu mẫu GET có thể đưa dữ liệu vào URL và lịch sử trình duyệt.
+URL GitHub Pages dự kiến: <https://hieu492003.github.io/portfolio_khoangtrunghieu_CNTT20-04/>
 
-Tệp chính:
+**Trạng thái:** repository vừa được tạo. GitHub Pages chưa được xác nhận; sau khi push, bật Pages cho nhánh `main` và thư mục `/(root)`, chờ deploy rồi kiểm tra URL trước khi nộp.
 
-- [index.html](./index.html) — trang portfolio.
-- [css/style.css](./css/style.css) — giao diện và bố cục responsive.
-- [ket-qua.html](./ket-qua.html) — trang kết quả mô phỏng.
-- [AI_LOG.md](./AI_LOG.md) — vấn đề, quyết định và kiểm chứng có hỗ trợ AI.
-- [RELEASE_NOTES.md](./RELEASE_NOTES.md) — ghi chú bản bàn giao.
-- [CHECKLIST.md](./CHECKLIST.md) — checklist kiểm chứng và triển khai.
+## Tính năng
 
-## Repository và GitHub Pages
+- Menu dẫn tới phần giới thiệu, kỹ năng, dự án, lộ trình và liên hệ.
+- Ảnh cá nhân đặt tại `assets/hieu.jpg`; thay tệp này nếu muốn dùng ảnh khác.
+- Bố cục responsive và trạng thái focus hỗ trợ thao tác bàn phím.
+- Biểu mẫu liên hệ kiểm tra dữ liệu bằng HTML5, chỉ mô phỏng và không gửi email/lưu dữ liệu.
 
-- Repository: <https://github.com/Hieu492003/2071020070_khoangtrunghieu_lab5>
-- URL Pages dự kiến: <https://hieu492003.github.io/2071020070_khoangtrunghieu_lab5/>
-- Nguồn triển khai phù hợp với cấu trúc hiện tại: nhánh `main`, thư mục gốc `/` (nơi đặt `index.html`).
+## Cách mở
 
-**Trạng thái:** URL Pages và API cấu hình Pages trả về HTTP 404 trong lần kiểm tra ngày 30/10/2026; chưa xác nhận có bản triển khai công khai. Sau khi push bản sửa, kiểm tra Settings → Pages; nếu chưa bật, chọn nhánh `main` và thư mục `/(root)`, đợi deploy rồi kiểm tra lại URL trước khi nộp.
+1. Mở URL ở mục Demo trong trình duyệt. Nếu GitHub Pages chưa hoạt động, tải hoặc clone repository về máy.
+2. Trong VS Code, chọn **File → Open Folder...** và mở thư mục repository.
+3. Mở `index.html`; để xem giống môi trường website hơn, nhấn chuột phải vào `index.html` và chọn **Open with Live Server** (nếu đã cài tiện ích).
+4. Bấm các mục trên menu để xem từng phần. Biểu mẫu chỉ nên thử bằng dữ liệu giả.
 
-## Cải tiến giao diện và kiểm chứng
+## Cấu trúc repository
 
-- **Vấn đề trước khi sửa:** `index.html` trỏ tới `css/` thay vì `css/style.css`; stylesheet không được nạp nên giao diện mất màu, bố cục và trạng thái focus.
-- **Tiêu chí:** trang phải nạp stylesheet cục bộ, giữ bố cục responsive, thể hiện màu nhận diện và cho phép nhìn rõ con trỏ/focus trong trường nhập.
-- **Cách sửa:** khôi phục đường dẫn stylesheet; giữ cỡ chữ 16px và trạng thái hover/focus của các trường nhập.
-- **Kiểm chứng cục bộ:** máy chủ HTTP trả 200 cho `index.html` và `css/style.css`; trình duyệt áp dụng màu nút, trường nhập 16px, nhập được dữ liệu và không tràn ngang ở viewport 375px. Biểu mẫu hợp lệ mở trang kết quả mô phỏng; chỉ dùng dữ liệu giả vì GET đưa dữ liệu vào URL.
-- **Kiểm chứng công khai:** chưa thực hiện thành công; URL GitHub Pages hiện trả HTTP 404.
-- **Minh chứng:** cần chụp ảnh trước/sau trên cùng viewport và ảnh Network của bản sau khi sửa; bổ sung link ảnh hoặc video demo tại đây sau khi lưu minh chứng. Không đánh dấu deploy là hoàn tất trước khi URL công khai mở được.
+- `index.html`, `ket-qua.html` — trang portfolio và kết quả biểu mẫu mô phỏng.
+- `css/style.css` — giao diện và bố cục responsive.
+- `assets/hieu.jpg` — ảnh cá nhân đang hiển thị.
+- `CHANGELOG.md` — thay đổi của bản V8.
+- `docs/evidence-index.md` — kết quả kiểm tra và ảnh minh chứng.
+- `docs/AI_LOG.md` — khai báo hỗ trợ AI.
 
-## Thông tin nộp LMS
+## Đã kiểm tra
 
-Điền thông tin cá nhân/lớp và SHA sau khi tạo commit cuối, push, triển khai và kiểm chứng:
+Kết quả và phạm vi kiểm tra được ghi tại [docs/evidence-index.md](docs/evidence-index.md). Chỉ các kết quả đã thực hiện mới được đánh dấu; nội dung chưa xác minh được ghi rõ.
 
-| Thông tin | Giá trị |
-|---|---|
-| Họ tên — MSSV — lớp | Khoàng Trung Hiếu — 2071020070 — bổ sung lớp |
-| Link repository | <https://github.com/Hieu492003/2071020070_khoangtrunghieu_lab5> |
-| URL GitHub Pages đã kiểm tra | Chưa triển khai; URL dự kiến ở trên |
-| Nhánh / thư mục nguồn | `main` / `/ (root)` |
-| SHA mã nguồn đã kiểm thử và push | `fe942990948ca1db8a9722e42523222bd71fa176` (chưa xác nhận được bản deploy vì URL Pages trả HTTP 404) |
-| Hồ sơ | README, AI_LOG, RELEASE_NOTES và CHECKLIST trong repository |
-| Minh chứng / demo | Bổ sung ảnh Network, ảnh cải tiến giao diện và video demo sau khi deploy |
+## Hạn chế / Chưa kiểm tra
+
+- URL GitHub Pages và tag V7/V8 cần được kiểm tra trên GitHub trước khi nộp.
+- Chưa có ảnh chụp sáu minh chứng, kết quả kiểm tra chéo với hai bạn, hoặc xác nhận của giảng viên trong repository.
+- Biểu mẫu liên hệ không gửi email; giao diện trên thiết bị thật chưa được xác minh trong Lab 8.
+
+## Khai báo AI
+
+Xem [docs/AI_LOG.md](docs/AI_LOG.md). Hãy đọc, tự kiểm tra và cập nhật các mục cá nhân trước khi nộp.
