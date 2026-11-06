@@ -2,6 +2,8 @@
 
 Chỉ ghi nhận kiểm tra thực tế. Chụp ảnh bằng Win+Shift+S và lưu trong `docs/evidence/`; không dùng ảnh minh họa thay cho kết quả thật.
 
+Theo dõi các việc còn thiếu trong [CHECKLIST.md](CHECKLIST.md). Báo cáo Word hiện có tại [bao-cao-lab8.docx](bao-cao-lab8.docx); báo cáo không thay thế ảnh minh chứng hoặc kiểm tra chéo thực tế.
+
 | Em thử gì | Kết quả | Ảnh/link |
 |---|---|---|
 | Kiểm tra trang trên máy | Mở trang cục bộ; tiêu đề và CSS hiển thị, ảnh chân dung tải được. | Chưa chụp |

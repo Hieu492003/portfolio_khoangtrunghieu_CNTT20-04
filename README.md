@@ -31,13 +31,16 @@ URL GitHub Pages dự kiến: <https://hieu492003.github.io/portfolio_khoangtrun
 - `index.html`, `ket-qua.html` — trang portfolio và kết quả biểu mẫu mô phỏng.
 - `css/style.css` — giao diện và bố cục responsive.
 - `assets/hieu.jpg` — ảnh cá nhân đang hiển thị.
-- `CHANGELOG.md` — thay đổi của bản V8.
-- `docs/evidence-index.md` — kết quả kiểm tra và ảnh minh chứng.
-- `docs/AI_LOG.md` — khai báo hỗ trợ AI.
+- `CHANGELOG.md` — lịch sử thay đổi.
+- `docs/RELEASE_NOTES.md` — ghi chú bàn giao bản V8.
+- `docs/CHECKLIST.md` — các việc cần hoàn tất trước khi nộp.
+- `docs/bao-cao-lab8.docx` — báo cáo có thể mở và chỉnh sửa bằng Microsoft Word.
+- `docs/evidence-index.md`, `docs/evidence/` — kết quả kiểm tra và ảnh minh chứng.
+- `docs/AI_LOG.md` — nhật ký hỗ trợ AI đầy đủ; `AI_LOG.md` ở thư mục gốc dẫn tới đây.
 
 ## Đã kiểm tra
 
-Kết quả và phạm vi kiểm tra được ghi tại [docs/evidence-index.md](docs/evidence-index.md). Chỉ các kết quả đã thực hiện mới được đánh dấu; nội dung chưa xác minh được ghi rõ.
+Kết quả và phạm vi kiểm tra được ghi tại [docs/evidence-index.md](docs/evidence-index.md). Chỉ các kết quả đã thực hiện mới được đánh dấu; nội dung chưa xác minh được ghi rõ. Xem thêm [checklist bàn giao](docs/CHECKLIST.md).
 
 ## Hạn chế / Chưa kiểm tra
 
